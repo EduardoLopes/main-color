@@ -88,13 +88,16 @@
 
         y = this.tiles.current / this.tiles.col >> 0;
 
-        for(i = 0; i < this.tiles.col / 2 >> 0; i++){
+        for(i = 0; i < this.tiles.col; i++){
 
           x = (this.tiles.current - y * this.tiles.col);
 
-          for(h = 0; h < 4; h++){
-            for(w = 0; w < 4; w++){
-              color = this.getPixel(((x * this.tiles.size) - (this.tiles.size / 2))+w * w, ((y * this.tiles.size) - (this.tiles.size / 2))+h * h);
+          for(h = 0; h < 2; h++){
+            for(w = 0; w < 2; w++){
+              if(h + w == 0){
+
+              }
+              color = this.getPixel(((x * this.tiles.size) - (this.tiles.size / 2))+w * 8, ((y * this.tiles.size) - (this.tiles.size / 2))+h * 8);
               index = this.colors.indexOf(color);
 
               if(color){
@@ -108,7 +111,7 @@
 
                 //debug
                 // this.ctx.fillStyle = 'rgba(24,24,24,0.8)';
-                // this.ctx.fillRect(((x * this.tiles.size) - (this.tiles.size / 2))+w * w, ((y * this.tiles.size) - (this.tiles.size / 2))+h * h, 1, 1);
+                // this.ctx.fillRect(((x * this.tiles.size) - (this.tiles.size / 2))+w * 8, ((y * this.tiles.size) - (this.tiles.size / 2))+h * 8, 1, 1);
 
               }
             }
