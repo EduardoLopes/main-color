@@ -17,8 +17,6 @@
       col: 0,
       current: 0
     }
-
-    this.img.onload = this.onImageLoad.bind(this);
   }
 
   MainColor.prototype = {
@@ -41,10 +39,8 @@
     setImage: function(image){
 
       if(typeof image === 'object'){
-        this.setCanvasSize(image.width, image.height);
-        this.ctx.drawImage(image, 0,0);
-        this.imageData = this.ctx.getImageData(0,0, this.canvas.width, this.canvas.height);
-        this.step();
+        this.img.src = image.src;
+        this.onImageLoad();
       }
 
       if(typeof image === 'string'){
@@ -52,7 +48,7 @@
       }
 
     },
-    onImageLoad: function(event){
+    onImageLoad: function(){
       this.setCanvasSize(this.img.width, this.img.height);
       this.ctx.drawImage(this.img, 0,0);
       this.imageData = this.ctx.getImageData(0,0, this.canvas.width, this.canvas.height);
