@@ -1,0 +1,111 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Main Color</title>
+  <style>
+    *{box-sizing: border-box;}
+
+    body{
+      transition: all 1s cubic-bezier(.67,0,0,1);
+    }
+
+    .container{
+      margin: 0 auto;
+      width: 90%;
+    }
+
+    img{
+      border: 1px #181818 solid;
+      transition: all 0.3s cubic-bezier(.67,0,0,1);
+      margin: 0 auto;
+      width: 100%;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    img.hover{
+      border: 10px #ccc solid;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container" id="container">
+    <img src="background-pixel.png" id="image">
+  </div>
+
+  <script src="maincolor.js"></script>
+  <script>
+
+  //Instantiate File Reader
+  var reader = new FileReader();
+  //Get img element
+  var image = document.getElementById('image');
+
+  //Instantiate MainColor
+  var mainColor = new MainColor();
+  //Callback when the main color is found
+  mainColor.onFindColor = function(color){
+    document.body.style.background = color;
+  }
+
+  /**
+  * Set the image to the element when finish reading
+  **/
+  reader.onload = function (event) {
+    image.src = event.target.result;
+  }
+
+  /**
+  * When the image is loaded, 'Sent' main color
+  **/
+  image.onload = function(){
+    mainColor.setImage(image);
+    //responsive stuff
+    container.style.maxWidth = mainColor.canvas.width+'px';
+  }
+
+  /**
+  * Handle drop on document
+  **/
+  function handleDrop(event){
+    event.preventDefault();
+
+    image.classList.remove('hover');
+
+    //check if the files exists
+    if ( event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0] ){
+
+      //Read the file
+      reader.readAsDataURL(event.dataTransfer.files[0]);
+
+  	}
+
+  }
+
+  /**
+  * Handle drag when enter the document
+  **/
+  function handleDragEnter(event){
+    event.preventDefault();
+
+    image.classList.add('hover');
+  }
+
+  /**
+  * Set Event Listeners
+  **/
+  document.addEventListener( 'drop', handleDrop, false );
+  document.addEventListener( 'dragenter', handleDragEnter, false );
+
+  /**
+  * Prevent drop default behavior
+  **/
+  document.addEventListener( 'dragover', function(event){
+    event.preventDefault();
+  }, false );
+
+  </script>
+</body>
+</html>
