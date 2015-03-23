@@ -53,7 +53,11 @@
       this.setCanvasSize(this.img.width, this.img.height);
       this.ctx.drawImage(this.img, 0,0);
       this.imageData = this.ctx.getImageData(0,0, this.canvas.width, this.canvas.height);
+      this.onSearchStart();
       this.step();
+    },
+    onSearchStart: function(){
+
     },
     searchMainColor: function(){
       var max = 0, index, i;
