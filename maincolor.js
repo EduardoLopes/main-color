@@ -21,7 +21,7 @@
   }
 
   MainColor.prototype = {
-    version: '0.0.1',
+    version: '0.0.4',
     setCanvasSize: function(width, height){
       this.canvas.width = width;
       this.canvas.height = height;
@@ -50,15 +50,18 @@
 
     },
     onImageLoad: function(){
-      this.setCanvasSize(this.img.width, this.img.height);
-      this.ctx.drawImage(this.img, 0,0);
+      var scale = 1;
+      if(this.img.width > 600 || this.img.height > 600){
+        scale = 0.5;
+      }
+      this.setCanvasSize(this.img.width * scale, this.img.width * scale);
+      this.ctx.drawImage(this.img, 0,0, this.img.width * scale, this.img.width * scale);
       this.imageData = this.ctx.getImageData(0,0, this.canvas.width, this.canvas.height);
       this.onSearchStart();
       this.step();
     },
-    onSearchStart: function(){
-
-    },
+    onSearchStart: function(){},
+    onFindColor: function(color){},
     searchMainColor: function(){
       var max = 0, index, i;
 
@@ -71,9 +74,7 @@
 
       }
 
-      if(typeof this.onFindColor == 'function'){
-        this.onFindColor(this.colors[index]);
-      }
+      this.onFindColor(this.colors[index]);
 
     },
     getPixel: function(x, y){
@@ -94,7 +95,7 @@
 
         y = this.tiles.current / this.tiles.col >> 0;
 
-        for(i = 0; i < this.tiles.col / 2; i++){
+        for(i = 0; i < this.tiles.col / 4; i++){
 
           x = (this.tiles.current - y * this.tiles.col);
 

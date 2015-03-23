@@ -13,6 +13,7 @@
     .container{
       margin: 0 auto;
       width: 90%;
+      text-align: center;
     }
 
     img{
@@ -54,6 +55,7 @@
 <body>
 
   <div class="container" id="container">
+    DRAG 'N DROP A IMAGE!
     <img src="background-pixel.png" id="image">
     <div class="loading" id="loading">LOADING...</div>
   </div>
@@ -69,12 +71,14 @@
 
   //Instantiate MainColor
   var mainColor = new MainColor();
-  //Callback when the main color is found
+
+  //Called when the main color is found
   mainColor.onFindColor = function(color){
     document.body.style.background = color;
     loading.classList.remove('active');
   }
 
+  //Called when start to search for the main color
   mainColor.onSearchStart = function(color){
     document.body.style.background = color;
     loading.classList.add('active');
