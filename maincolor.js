@@ -11,6 +11,7 @@
     this.colors = [];
     this.colorsScore = [];
     this.rafID = 0;
+    this.mainColorScore = 0;
     this.tiles = {
       size: 32,
       row: 0,
@@ -32,6 +33,7 @@
       this.tiles.current = 0;
       this.colors.length = 0;
       this.colorsScore.length = 0;
+      this.mainColorScore = 0;
     },
     updateTiles: function(){
       this.tiles.col = Math.floor(this.canvas.width / this.tiles.size);
@@ -63,17 +65,8 @@
     onSearchStart: function(){},
     onFindColor: function(color){},
     searchMainColor: function(){
-      var max = 0, index, i;
 
-      for(i = 0; i < this.colorsScore.length; i++){
-
-        if(this.colorsScore[i] > max){
-          max = this.colorsScore[i];
-          index = i;
-        }
-
-      }
-
+      var index = this.colorsScore.indexOf(this.mainColorScore);
       this.onFindColor(this.colors[index]);
 
     },
@@ -110,6 +103,7 @@
                   this.colorsScore.push(1);
                 } else {
                   this.colorsScore[index] += 1;
+                  this.mainColorScore = Math.max(this.mainColorScore, this.colorsScore[index])
                 }
 
               }
