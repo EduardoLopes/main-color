@@ -17,6 +17,7 @@
       col: 0,
       current: 0
     }
+
   }
 
   MainColor.prototype = {
@@ -55,9 +56,9 @@
       this.step();
     },
     searchMainColor: function(){
-      var max = 0, index;
+      var max = 0, index, i;
 
-      for(var i = 0; i < this.colorsScore.length; i++){
+      for(i = 0; i < this.colorsScore.length; i++){
 
         if(this.colorsScore[i] > max){
           max = this.colorsScore[i];
@@ -72,28 +73,31 @@
 
     },
     getPixel: function(x, y){
+      var r, g, b, a, index;
       if(x < 0 || y < 0) return false;
-      var index = (x + y * this.imageData.width) * 4;
-      var r = this.imageData.data[index+0];
-      var g = this.imageData.data[index+1];
-      var b = this.imageData.data[index+2];
-      var a = this.imageData.data[index+3];
+      index = (x + y * this.imageData.width) * 4;
+      r = this.imageData.data[index+0];
+      g = this.imageData.data[index+1];
+      b = this.imageData.data[index+2];
+      a = this.imageData.data[index+3];
 
       return 'rgba('+r+','+g+','+b+','+a+')';
     },
     step: function(){
+      var x, y, h, w, i, color, index;
+
       if(this.tiles.current <= this.tiles.row * this.tiles.col){
 
-        var y = this.tiles.current / this.tiles.col >> 0;
+        y = this.tiles.current / this.tiles.col >> 0;
 
-        for(var i = 0; i < this.tiles.col / 2; i++){
+        for(i = 0; i < this.tiles.col / 2; i++){
 
-          var x = (this.tiles.current - y * this.tiles.col);
+          x = (this.tiles.current - y * this.tiles.col);
 
-          for(var h = 0; h < 4; h++){
-            for(var w = 0; w < 4; w++){
-              var color = this.getPixel(((x * this.tiles.size) - (this.tiles.size / 2))+w, ((y * this.tiles.size) - (this.tiles.size / 2))+h);
-              var index = this.colors.indexOf(color);
+          for(h = 0; h < 4; h++){
+            for(w = 0; w < 4; w++){
+              color = this.getPixel(((x * this.tiles.size) - (this.tiles.size / 2))+w, ((y * this.tiles.size) - (this.tiles.size / 2))+h);
+              index = this.colors.indexOf(color);
 
               if(color){
                 if(index == -1){
