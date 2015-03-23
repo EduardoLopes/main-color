@@ -7,6 +7,7 @@
 
     body{
       transition: all 1s cubic-bezier(.67,0,0,1);
+      font-family: sans-serif;
     }
 
     .container{
@@ -27,12 +28,34 @@
       border: 10px #ccc solid;
     }
 
+    .loading{
+      font-size: 2em;
+      transition: all 0.3s cubic-bezier(.67,0,0,1);
+      transform: scale(0);
+      background: #fff;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      line-height: 60px;
+      text-align: center;
+      width: 200px;
+      height: 60px;
+    }
+
+    .loading.active{
+      transform: scale(1);
+    }
+
   </style>
 </head>
 <body>
 
   <div class="container" id="container">
     <img src="background-pixel.png" id="image">
+    <div class="loading" id="loading">LOADING...</div>
   </div>
 
   <script src="maincolor.js"></script>
@@ -42,12 +65,19 @@
   var reader = new FileReader();
   //Get img element
   var image = document.getElementById('image');
+  var loading = document.getElementById('loading');
 
   //Instantiate MainColor
   var mainColor = new MainColor();
   //Callback when the main color is found
   mainColor.onFindColor = function(color){
     document.body.style.background = color;
+    loading.classList.remove('active');
+  }
+
+  mainColor.onSearchStart = function(color){
+    document.body.style.background = color;
+    loading.classList.add('active');
   }
 
   /**
