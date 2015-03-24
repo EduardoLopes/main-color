@@ -19,6 +19,7 @@
       current: 0
     }
 
+    this.img.onload = this.onImageLoad.bind(this);
   }
 
   MainColor.prototype = {
