@@ -19,11 +19,11 @@
       current: 0
     }
 
-    //this.img.onload = this.onImageLoad.bind(this);
+    this.img.onload = this.onImageLoad.bind(this);
   }
 
   MainColor.prototype = {
-    version: '0.0.4',
+    version: '0.0.8',
     setCanvasSize: function(width, height){
       this.canvas.width = width;
       this.canvas.height = height;
@@ -46,7 +46,6 @@
 
       if(typeof image === 'object'){
         this.img.src = image.src;
-        this.onImageLoad();
       }
 
       if(typeof image === 'string'){
