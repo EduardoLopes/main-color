@@ -37,10 +37,10 @@
       this.mainColorScore = 0;
     },
     updateTiles: function(){
-      this.tiles.col = 20;
-      this.tiles.row = 20;
-      this.tiles.size.x = Math.floor(this.canvas.width / 20);
-      this.tiles.size.y = Math.floor(this.canvas.height / 20);
+      this.tiles.col = 25;
+      this.tiles.row = 25;
+      this.tiles.size.x = Math.floor(this.canvas.width / 25);
+      this.tiles.size.y = Math.floor(this.canvas.height / 25);
     },
     setImage: function(image){
 
@@ -81,7 +81,7 @@
       b = this.imageData.data[index+2];
       a = this.imageData.data[index+3];
 
-      if(!r || !g || !b || !a) return false;
+      if(r == null || g == null || b == null || a == null) return false;
 
       return 'rgba('+r+','+g+','+b+','+a+')';
     },
@@ -109,12 +109,14 @@
 
               if(color){
                 if(index == -1){
-                  this.colors[this.colors.length - 1] = color;
-                  this.colorsScore[this.colors.length - 1] = 1;
+                  this.colors[this.colors.length] = color;
+                  this.colorsScore[this.colors.length] = 1;
                 } else {
+                  if(this.colorsScore[index] == null) this.colorsScore[index] = 0;
                   this.colorsScore[index] += 1;
                   this.mainColorScore = Math.max(this.mainColorScore, this.colorsScore[index])
                 }
+
                 //debug
                 // this.ctx.fillStyle = 'rgba(24,24,24,0.8)';
                 // this.ctx.fillRect(((x * this.tiles.size.x) + (this.tiles.size.x / 3))+w * (this.tiles.size.x / 3) >> 0, ((y * this.tiles.size.y) + + (this.tiles.size.y / 3))+h * (this.tiles.size.y / 3) >> 0, 1, 1);
