@@ -27,11 +27,11 @@
     setCanvasSize: function(width, height){
       this.canvas.width = width;
       this.canvas.height = height;
-      this.resetStep();
       this.updateTiles();
+      this.resetStep();
     },
     resetStep: function(){
-      this.tiles.current = 0;
+      this.tiles.current = this.tiles.row * this.tiles.col;
       this.colors.length = 0;
       this.colorsScore.length = 0;
       this.mainColorScore = 0;
@@ -88,13 +88,13 @@
     step: function(){
       var x, y, h, w, i, color, index;
 
-      if(this.tiles.current < this.tiles.row * this.tiles.col){
+      if(this.tiles.current >= 0){
 
         y = this.tiles.current / this.tiles.col >> 0;
 
-        for(i = 0; i < this.tiles.col; i++){
+        for(i = this.tiles.col; i >= 0; i--){
 
-          x = (this.tiles.current - y * this.tiles.col);
+          x = (this.tiles.current - y * i);
 
           //debug
           // this.ctx.strokeStyle = 'rgba(24,24,24,0.02)';
@@ -123,7 +123,7 @@
             }
           }
 
-          this.tiles.current += 1;
+          this.tiles.current -= 1;
         }
 
       } else {
