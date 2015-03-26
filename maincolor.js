@@ -2,7 +2,8 @@
 
   'use strict';
 
-  function MainColor(){
+  function MainColor(options){
+    var options = options || {};
 
     this.canvas = document.createElement('canvas');
     this.ctx = this.canvas.getContext('2d');
@@ -17,18 +18,24 @@
       row: 0,
       col: 0,
       current: 0
-    }
+    };
+
+    this.setAccuracy(options.accuracy || 25);
 
     this.img.onload = this.onImageLoad.bind(this);
   }
 
   MainColor.prototype = {
-    version: '0.0.8',
+    version: '0.0.9',
     setCanvasSize: function(width, height){
       this.canvas.width = width;
       this.canvas.height = height;
       this.updateTiles();
       this.resetStep();
+    },
+    setAccuracy: function(accuracy){
+      this.tiles.row = Math.max(1, Math.min(accuracy, 50));
+      this.tiles.col = Math.max(1, Math.min(accuracy, 50));
     },
     resetStep: function(){
       this.tiles.current = this.tiles.row * this.tiles.col;
@@ -37,10 +44,8 @@
       this.mainColorScore = 0;
     },
     updateTiles: function(){
-      this.tiles.col = 25;
-      this.tiles.row = 25;
-      this.tiles.size.x = Math.floor(this.canvas.width / 25);
-      this.tiles.size.y = Math.floor(this.canvas.height / 25);
+      this.tiles.size.x = Math.floor(this.canvas.width / this.tiles.col);
+      this.tiles.size.y = Math.floor(this.canvas.height / this.tiles.row);
     },
     setImage: function(image){
 
@@ -55,7 +60,7 @@
     },
     onImageLoad: function(){
       var scale = 1;
-      if(this.img.width > 600 || this.img.height > 600){
+      if(this.img.width > 600 || this.img.height > 800){
         scale = 0.5;
       }
       this.setCanvasSize(this.img.width * scale, this.img.height * scale);
@@ -64,8 +69,8 @@
       this.onSearchStart();
       this.step();
     },
-    onSearchStart: function(){},
-    onFindColor: function(color){},
+    onSearchStart: false,
+    onFindColor: false,
     searchMainColor: function(){
 
       var index = this.colorsScore.indexOf(this.mainColorScore);
