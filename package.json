@@ -1,0 +1,25 @@
+{
+  "name": "main-color",
+  "version": "0.0.9",
+  "description": "Search for the main color in a image!",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EduardoLopes/main-color.git"
+  },
+  "keywords": [
+    "image",
+    "processing",
+    "colors"
+  ],
+  "author": "Eduardo Lopes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EduardoLopes/main-color/issues"
+  },
+  "homepage": "https://github.com/EduardoLopes/main-color",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^1.1.0"
+  }
+}
