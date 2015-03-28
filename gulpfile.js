@@ -3,8 +3,11 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 
 gulp.task('dist', function() {
-  return gulp.src('maincolor.js')
-    .pipe(uglify())
+  return gulp.src('src/maincolor.js')
+    .pipe(gulp.dest('./dist'))
+    .pipe(uglify({
+      preserveComments: 'some'      
+    }))
     .pipe(rename('maincolor.min.js'))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./dist'));
 });

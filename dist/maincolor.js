@@ -1,7 +1,7 @@
 /**
-* @autor        Eduardo Lopes <EduardoLopesDS@gmail.com>
-* @copyright    2015 Eduardo Lopes
-* @license      {@link https://github.com/EduardoLopes/main-color/blob/master/LICENSE|MIT License}
+* !@autor        Eduardo Lopes <EduardoLopesDS@gmail.com>
+* !@copyright    2015 Eduardo Lopes
+* !@license      {@link https://github.com/EduardoLopes/main-color/blob/master/LICENSE|MIT License}
 */
 
 (function(global){
