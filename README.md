@@ -9,6 +9,8 @@ What this lib does is find the main color as fast as possible to have a result i
 
 To search the main color in a image size like 1600 X 1200, you need 1.920.000 iterations to check every single pixel of the image (depending on the algorithm)! With Lazy Quantization only needs 2500 iterations (because it's lazy), depending on the configuration! But as i said, it's not too accurated and it can show some odd results!
 
+[Check out the example!](http://codepen.io/EduardoLopes/full/GgevyK/)
+
 ## Usage
 
 ```js
